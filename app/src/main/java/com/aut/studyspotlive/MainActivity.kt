@@ -1,47 +1,58 @@
 package com.aut.studyspotlive
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.aut.studyspotlive.ui.screens.StudySpotListScreen
 import com.aut.studyspotlive.ui.theme.StudySpotLiveTheme
+import com.aut.studyspotlive.viewmodel.StudySpotViewModel
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
+    // Initialize ViewModel
+    private val viewModel: StudySpotViewModel by viewModels()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialize Firebase
+        initializeFirebase()
+        
         enableEdgeToEdge()
         setContent {
             StudySpotLiveTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    // Display the study spot list screen
+                    StudySpotListScreen(viewModel = viewModel)
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    StudySpotLiveTheme {
-        Greeting("Android")
+    
+    private fun initializeFirebase() {
+        try {
+            // Initialize Firebase
+            FirebaseApp.initializeApp(this)
+            // Firebase is ready
+        } catch (e: Exception) {
+            // Handle Firebase initialization error
+            Toast.makeText(
+                this,
+                "Error initializing Firebase: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+            e.printStackTrace()
+        }
     }
 }
