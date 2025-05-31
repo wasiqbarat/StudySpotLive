@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "727991185861",
+    "project_id": "studyspotlivefirebase",
+    "storage_bucket": "studyspotlivefirebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727991185861:android:ea111cfef18d26515d5bac",
+        "android_client_info": {
+          "package_name": "com.aut.studyspotlive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtZx-PU_Iq7wZugj6StJAZ0wN1SPdKb4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
